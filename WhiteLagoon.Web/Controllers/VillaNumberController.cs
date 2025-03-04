@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WhiteLagoon.Domain.Entities;
 using WhiteLagoon.Infrastructure.Data;
 
@@ -17,30 +18,37 @@ namespace WhiteLagoon.Web.Controllers
             var villaNumbers = _db.VillaNumbers.ToList();
             return View(villaNumbers);
         }
-/*
+
         public IActionResult Create()
         {
+            VillaNumber villaNumberVM = new()
+            {
+                VillaList = _db.Villas.ToList().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                })
+            };
+            
+            ViewBag.VillaList = list;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Villa obj)
+        public IActionResult Create(VillaNumber obj)
         {
-            if(obj.Name == obj.Description)
-            {
-                ModelState.AddModelError("", "The Description cannot exactly match the Name.");
-            }
             if (ModelState.IsValid)
             {
-                _db.Villas.Add(obj);
+                _db.VillaNumbers.Add(obj);
                 _db.SaveChanges();
-                TempData["success"] = "The villa created successfuly.";
+                TempData["success"] = "The Villa Number created successfuly.";
                 return RedirectToAction("Index");
             }
-            TempData["error"] = "The villa could not be created.";
+            TempData["error"] = "The Villa Number could not be created.";
             return View();
         }
 
+        /*
         public IActionResult Update(int villaId)
         {
             Villa? obj = _db.Villas.FirstOrDefault(x => x.Id == villaId);
