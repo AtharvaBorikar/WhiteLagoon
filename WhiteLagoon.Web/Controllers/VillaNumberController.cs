@@ -132,7 +132,7 @@ namespace WhiteLagoon.Web.Controllers
                 TempData["success"] = "The Villa Number has been deleted successfuly.";
                 return RedirectToAction(nameof(Index));
             }
-            TempData["error"] = "The Villa Number could not be updated.";
+            TempData["error"] = "The Villa Number could not be deleted.";
             return RedirectToAction(nameof(Index));
         }
     }
